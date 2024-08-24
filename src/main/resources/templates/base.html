@@ -1,6 +1,6 @@
 <!DOCTYPE html>
 <html
-  class="dark"
+  class=""
   id="baseClassHtmlTag"
   lang="en"
   th:fragment="parent(content,title,script,link)"
@@ -26,7 +26,7 @@
 
   <body class="dark:bg-gray-900 text-white dark:text-black">
     <!-- common header -->
-    <div data-th-replace="navbar::navbar"></div>
+    <div data-th-replace="~{navbar::navbar}"></div>
 
     <!-- main body -->
     <div class="p-4">
@@ -41,34 +41,6 @@
     <!--------------------------------- scripts, flowbite -->
     <script src="https://cdn.jsdelivr.net/npm/flowbite@2.5.1/dist/flowbite.min.js"></script>
     <th:block data-th-replace="${script}"></th:block>
-    <script>
-      const thmBtn = document.getElementById("toggleTheme");
-      console.log(thmBtn);
-      
-      thmBtn.addEventListener("click", toggleTheme);
-      
-      function toggleTheme() {
-        console.log("btnClick");
-        const htmlTag = document.getElementById("baseClassHtmlTag");
-        console.log(htmlTag);
-
-        htmlTag.classList.toggle("dark");
-        console.log(htmlTag);
-        
-        // Sun btn, dark to light  changing icon.
-        const thmBtn2 = document.getElementById("toggleTheme")?.children[0];
-        if(thmBtn2.classList.contains("fa-moon"))
-        {
-          thmBtn2.classList.replace("fa-moon","fa-sun");
-          thmBtn2.style.color = "#fff";
-        }
-        else{
-          console.log("here");
-          thmBtn2.classList.replace("fa-sun","fa-moon");
-          thmBtn2.style.color = "#000";
-        }
-
-      }
-    </script>
+    <script  data-th-src="@{'/js/script.js'}"></script>/>
   </body>
 </html>
