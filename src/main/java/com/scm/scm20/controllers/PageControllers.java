@@ -3,8 +3,12 @@ package com.scm.scm20.controllers;
 
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
-// import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.ModelAttribute;
+import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestMethod;
+
+import com.scm.scm20.forms.UserForm;
 
 @Controller
 public class PageControllers {
@@ -46,9 +50,28 @@ public class PageControllers {
     }
 
     // signup page
-    @RequestMapping("/signup")
-    public String signupPage(){
+    @RequestMapping("/register")
+    public String signupPage(Model model){
+        // Default field data
+        UserForm userForm = new UserForm();
+        // userForm.setName("Pawan");
+        // userForm.setAbout("Write something about yourself");
+        model.addAttribute("userForm", userForm);       //setting blank object User Form.
         return "signup";
     }
     
+    @PostMapping(value="/do-register")
+    public String processRegister(@ModelAttribute UserForm userForm){
+        System.out.println("User registration");
+        // form-fields => object attributes.
+        //fetch data from sign up form
+        System.out.println(userForm);
+        // validate data
+
+        // Save form data to database
+
+        // message: "Registration Successfull"
+        // redirect 
+        return "redirect:/home";
+    }
 }
