@@ -64,14 +64,14 @@ public class PageControllers {
     public String processRegister(@ModelAttribute UserForm userForm){
         System.out.println("User registration");
         // form-fields => object attributes.
-        //fetch data from sign up form
+        //1.fetch data from sign up form
         System.out.println(userForm);
-        // validate data
+        //2. validate data
 
-        // Save form data to database
+        //3.Save form data to database
 
-        // message: "Registration Successfull"
-        // redirect 
+        //4.message: "Registration Successfull"
+        //5.redirect 
         return "redirect:/home";
     }
 }
