@@ -3,6 +3,7 @@ package com.scm.scm20.entities;
 import jakarta.persistence.CascadeType;
 import jakarta.persistence.Column;
 import jakarta.persistence.Entity;
+import jakarta.persistence.Enumerated;
 import jakarta.persistence.FetchType;
 import jakarta.persistence.Id;
 import jakarta.persistence.OneToMany;
@@ -45,8 +46,10 @@ public class User {
     private boolean phoneVerified = false;
 
 
-    //Provider, sign up through
-    private Provider provider = Provider.SELF;
+    //Provider, sign up through GOOGLE,GITHUB,LINKEDIN,TWITTER
+    @Enumerated
+    // @Builder.Default("SELF")
+    private Provider provider;
     private String providerUserId;
 
     @OneToMany(mappedBy = "user",cascade = CascadeType.ALL, fetch = FetchType.LAZY, orphanRemoval = true)

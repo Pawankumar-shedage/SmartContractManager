@@ -1,17 +1,22 @@
 package com.scm.scm20.controllers;
 
 
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RequestMethod;
 
+import com.scm.scm20.entities.User;
 import com.scm.scm20.forms.UserForm;
+import com.scm.scm20.services.UserService;
 
 @Controller
 public class PageControllers {
+
+    @Autowired              //injecting bean , bean: object of a class. here injecting UserServiceImpl object into Controller class.
+    private UserService userService;
 
     // home page
     @RequestMapping({"/home","/"})
@@ -69,6 +74,20 @@ public class PageControllers {
         //2. validate data
 
         //3.Save form data to database
+        // UserForm data -> User
+
+        User savedUser = User.builder()
+            .name(userForm.getName())
+            .email(userForm.getEmail())
+            .about(userForm.getAbout())
+            .password(userForm.getPassword())
+            .phoneNumber(userForm.getPhoneNumber())
+            .profilePic("https://static.vecteezy.com/system/resources/thumbnails/030/504/836/small/avatar-account-flat-isolated-on-transparent-background-for-graphic-and-web-design-default-social-media-profile-photo-symbol-profile-and-people-silhouette-user-icon-vector.jpg")
+            .build();
+
+        userService.saveUser(savedUser);
+
+        System.out.println("User saved "+ savedUser);
 
         //4.message: "Registration Successfull"
         //5.redirect 
