@@ -3,6 +3,7 @@ package com.scm.scm20.entities;
 import jakarta.persistence.CascadeType;
 import jakarta.persistence.Column;
 import jakarta.persistence.Entity;
+import jakarta.persistence.EnumType;
 import jakarta.persistence.Enumerated;
 import jakarta.persistence.FetchType;
 import jakarta.persistence.Id;
@@ -23,6 +24,7 @@ import java.util.List;
 @Builder
 @AllArgsConstructor
 @NoArgsConstructor
+
 public class User {
 
     @Id
@@ -47,9 +49,8 @@ public class User {
 
 
     //Provider, sign up through GOOGLE,GITHUB,LINKEDIN,TWITTER
-    @Enumerated
-    // @Builder.Default("SELF")
-    private Provider provider;
+    // @Enumerated(value=EnumType.STRING)
+    private Provider provider= Provider.GOOGLE;
     private String providerUserId;
 
     @OneToMany(mappedBy = "user",cascade = CascadeType.ALL, fetch = FetchType.LAZY, orphanRemoval = true)

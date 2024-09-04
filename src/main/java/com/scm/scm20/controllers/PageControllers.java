@@ -76,20 +76,31 @@ public class PageControllers {
         //3.Save form data to database
         // UserForm data -> User
 
-        User savedUser = User.builder()
-            .name(userForm.getName())
-            .email(userForm.getEmail())
-            .about(userForm.getAbout())
-            .password(userForm.getPassword())
-            .phoneNumber(userForm.getPhoneNumber())
-            .profilePic("https://static.vecteezy.com/system/resources/thumbnails/030/504/836/small/avatar-account-flat-isolated-on-transparent-background-for-graphic-and-web-design-default-social-media-profile-photo-symbol-profile-and-people-silhouette-user-icon-vector.jpg")
-            .build();
+        // User savedUser = User.builder()
+        //     .name(userForm.getName())
+        //     .email(userForm.getEmail())
+        //     .about(userForm.getAbout())
+        //     .password(userForm.getPassword())
+        //     .phoneNumber(userForm.getPhoneNumber())
+        //     .profilePic("https://static.vecteezy.com/system/resources/thumbnails/030/504/836/small/avatar-account-flat-isolated-on-transparent-background-for-graphic-and-web-design-default-social-media-profile-photo-symbol-profile-and-people-silhouette-user-icon-vector.jpg")
+        //     .build();
 
-        userService.saveUser(savedUser);
+        User user = new User();
+        user.setName(userForm.getName());
+        user.setEmail(userForm.getEmail());
+        user.setAbout(userForm.getAbout());
+        user.setPassword(userForm.getPassword());
+        user.setPhoneNumber(userForm.getPhoneNumber());
+        user.setProfilePic("https://static.vecteezy.com/system/resources/thumbnails/030/504/836/small/avatar-account-flat-isolated-on-transparent-background-for-graphic-and-web-design-default-social-media-profile-photo-symbol-profile-and-people-silhouette-user-icon-vector.jpg");
+
+        User savedUser = userService.saveUser(user);
 
         System.out.println("User saved "+ savedUser);
 
-        //4.message: "Registration Successfull"
+        //4.Add message: "Registration Successfull/failed/Warning"
+        
+
+
         //5.redirect 
         return "redirect:/home";
     }
