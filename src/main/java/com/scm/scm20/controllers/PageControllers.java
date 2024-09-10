@@ -12,6 +12,8 @@ import com.scm.scm20.entities.User;
 import com.scm.scm20.forms.UserForm;
 import com.scm.scm20.services.UserService;
 
+import jakarta.servlet.http.HttpSession;
+
 @Controller
 public class PageControllers {
 
@@ -66,7 +68,7 @@ public class PageControllers {
     }
     
     @PostMapping(value="/do-register")
-    public String processRegister(@ModelAttribute UserForm userForm){
+    public String processRegister(@ModelAttribute UserForm userForm,HttpSession session){
         System.out.println("User registration");
         // form-fields => object attributes.
         //1.fetch data from sign up form
@@ -98,8 +100,8 @@ public class PageControllers {
         System.out.println("User saved "+ savedUser);
 
         //4.Add message: "Registration Successfull/failed/Warning"
-        
-
+        // Message message = Message.builder().
+        session.setAttribute("message", "Registration Successfull");
 
         //5.redirect 
         return "redirect:/home";
